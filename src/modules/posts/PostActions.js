@@ -3,6 +3,8 @@ import * as ReadableAPIUtil from '../../utils/api';
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const ADD_POST = 'ADD_POST'
 export const REMOVE_POST = 'REMOVE_POST'
+export const SORT_BY_SCORE = 'SORT_BY_SCORE'
+export const SORT_BY_DATE = 'SORT_BY_DATE'
 
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -14,6 +16,18 @@ export const fetchPosts = () => dispatch => (
       .fetchPosts()
       .then(posts => dispatch(receivePosts(posts)))
 );
+
+export function sortByScore () {
+  return {
+    type: SORT_BY_SCORE
+  }
+}
+
+export function sortByDate () {
+  return {
+    type: SORT_BY_DATE
+  }
+}
 
 export function addPost ({ day, recipe, meal }) {
   return {

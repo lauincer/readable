@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import CategoryList from './../modules/categories/components/CategoryList'
 import PostList from './../modules/posts/components/PostList'
 import { fetchCategories } from './../modules/categories/CategoryActions'
-import { fetchPosts } from './../modules/posts/PostActions'
+import { fetchPosts, sortByScore, sortByDate } from './../modules/posts/PostActions'
 
 class Root extends Component {
 
@@ -14,13 +14,9 @@ class Root extends Component {
      this.props.fetchPosts();
  }
 
- orderBy(type) {
-   console.log('orderBy');
- }
-
   render() {
     console.log('Props', this.props);
-    const { category, post } = this.props;
+    const { category, post, sortByScore, sortByDate } = this.props;
 
     return (
       <div>
@@ -28,9 +24,9 @@ class Root extends Component {
           <div>
             <CategoryList list={category.categoryList} />
             <div>
-              <h4>Filter by:</h4>
-              <button onClick={this.orderBy('score')}>Score</button>
-              <button onClick={this.orderBy('date')}>Date</button>
+              <h4>Sort by:</h4>
+              <button onClick={() => sortByScore()}>Score</button>
+              <button onClick={() => sortByDate()}>Date</button>
             </div>
             <PostList list={post.postList} />
           </div>
@@ -60,7 +56,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCategories: (data) => dispatch(fetchCategories()),
-    fetchPosts: (data) => dispatch(fetchPosts())
+    fetchPosts: (data) => dispatch(fetchPosts()),
+    sortByScore: (data) => dispatch(sortByScore()),
+    sortByDate: (data) => dispatch(sortByDate())
   }
 }
 
