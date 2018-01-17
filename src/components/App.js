@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
 import './App.css';
 import Root from './Root'
 
@@ -10,9 +9,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Readable</h1>
         </header>
-        <Route exact path="/" render={() => (
-          <Root/>
-        )}/>
+        <Root/>
       </div>
     );
   }

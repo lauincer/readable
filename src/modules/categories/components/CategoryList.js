@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 export default function CategoryList ({ list }) {
   return (
@@ -9,7 +10,7 @@ export default function CategoryList ({ list }) {
       <ul>
         {list.map((item) => (
           <li key={item.name}>
-            {item.name}
+            <Link to={`/${item.name}`}>{item.name}</Link>
           </li>
         ))}
       </ul>
