@@ -7,14 +7,14 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker';
-import { default as categoryReducer } from './modules/categories/CategoryReducer'
-import { default as postReducer } from './modules/posts/PostReducer'
+import { default as category } from './modules/categories/CategoryReducer'
+import { default as post } from './modules/posts/PostReducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const rootReducer = combineReducers({
-  categoryReducer,
-  postReducer,
+  category,
+  post,
  })
 
 const store = createStore(

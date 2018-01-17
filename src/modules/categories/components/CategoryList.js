@@ -8,7 +8,7 @@ export default function CategoryList ({ list }) {
         Category List
       </h2>
       <ul>
-        {list.map((item) => (
+        {list && list.map((item) => (
           <li key={item.name}>
             <Link to={`/${item.name}`}>{item.name}</Link>
           </li>

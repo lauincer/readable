@@ -4,12 +4,12 @@ import {
   REMOVE_POST
 } from './PostActions'
 
-function postReducer (state = {}, action) {
+function post (state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS :
       return {
         ...state,
-        postList: action.data,
+        postList: action.posts,
       }
     case ADD_POST :
       return {
@@ -24,4 +24,4 @@ function postReducer (state = {}, action) {
   }
 }
 
-export default postReducer;
+export default post;

@@ -7,7 +7,7 @@ export default function PostList ({ list }) {
         Post List
       </h2>
       <ul>
-        {list.map((post) => (
+        {list && list.map((post) => (
           <li key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.author}</p>

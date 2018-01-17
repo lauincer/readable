@@ -3,56 +3,47 @@ import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CategoryList from './../modules/categories/components/CategoryList'
 import PostList from './../modules/posts/components/PostList'
-
-export function fetchCategories () {
-  return fetch(
-    'http://localhost:3001/categories',
-    {headers: { 'Authorization': 'whatever-you-want' }}
-  ).then((res) => res.json())
-}
-
-export function fetchPosts () {
-  return fetch(
-    'http://localhost:3001/posts',
-    {headers: { 'Authorization': 'whatever-you-want' }}
-  ).then((res) => res.json())
-}
+import { fetchCategories } from './../modules/categories/CategoryActions'
+import { fetchPosts } from './../modules/posts/PostActions'
 
 class Root extends Component {
-  state = {
-    categoryList: [],
-    postList: []
-  }
 
-  componentDidMount() {
-    fetchCategories()
-    .then((res) => this.setState(() => ({
-      categoryList: res.categories
-    })))
+ constructor(props, context) {
+     super(props, context);
+     this.props.fetchCategories();
+     this.props.fetchPosts();
+ }
 
-    fetchPosts()
-    .then((res) => this.setState(() => ({
-      postList: res
-    })))
-  }
+ orderBy(type) {
+   console.log('orderBy');
+ }
 
   render() {
     console.log('Props', this.props);
+    const { category, post } = this.props;
+
     return (
       <div>
         <Route exact path="/" render={() => (
           <div>
-            <CategoryList list={this.state.categoryList} />
-            <PostList list={this.state.postList} />
+            <CategoryList list={category.categoryList} />
+            <div>
+              <h4>Filter by:</h4>
+              <button onClick={this.orderBy('score')}>Score</button>
+              <button onClick={this.orderBy('date')}>Date</button>
+            </div>
+            <PostList list={post.postList} />
           </div>
         )}/>
-        {this.state.categoryList.map((category) => (
-          <Route exact path={`/${category.name}`} render={() => (
-            <div>
-              <h1>{category.name}</h1>
-              <CategoryList list={this.state.categoryList} />
-              <PostList list={[]} category='' />
-            </div>
+        {category.categoryList && category.categoryList.map((cat) => (
+          <Route exact path={`/${cat.name}`}
+                 key={cat.name}
+                 render={() => (
+                  <div>
+                    <h1>Category: {cat.name}</h1>
+                    <CategoryList list={category.categoryList} />
+                    <PostList list={post.postList} category={cat.name} />
+                  </div>
           )}/>
         ))}
       </div>
@@ -62,11 +53,11 @@ class Root extends Component {
 
 function mapStateToProps(state) {
   return {
-    test: state
+    ...state
   }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     fetchCategories: (data) => dispatch(fetchCategories()),
     fetchPosts: (data) => dispatch(fetchPosts())

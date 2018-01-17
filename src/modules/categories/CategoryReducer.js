@@ -2,16 +2,16 @@ import {
   RECEIVE_CATEGORIES
 } from './CategoryActions'
 
-function categoryReducer (state = {}, action) {
+function category (state = {}, action) {
   switch (action.type) {
     case RECEIVE_CATEGORIES:
       return {
         ...state,
-        categoryList: action.data,
+        categoryList: action.categories.categories,
       }
     default :
       return state
   }
 }
 
-export default categoryReducer;
+export default category;
