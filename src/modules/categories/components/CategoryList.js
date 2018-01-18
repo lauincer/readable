@@ -5,7 +5,7 @@ export default function CategoryList ({ list }) {
   return (
     <div className='category-list'>
       <h2 className='subheader'>
-        Category List
+        Categories
       </h2>
       <ul>
         {list && list.map((item) => (

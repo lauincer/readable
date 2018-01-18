@@ -10,7 +10,7 @@ class PostList extends Component {
     return (
         <div className='post-list'>
           <h2 className='subheader'>
-            Post List
+            Posts
           </h2>
           <a>+ Add New Post</a>
           <div>
