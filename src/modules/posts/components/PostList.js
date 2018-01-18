@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { sortByScore, sortByDate } from './../../posts/PostActions'
+import { sortByScore, sortByDate } from './../PostActions'
 
 class PostList extends Component {
   render() {
@@ -28,6 +28,7 @@ class PostList extends Component {
                 </Link>
                 <p>{post.author}</p>
                 <p>{post.voteScore}</p>
+                <p>{new Date(post.timestamp).toDateString()}</p>
                 <p>{post.category}</p>
               </li>
             ))}

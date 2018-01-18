@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import CommentList from './../../comments/components/CommentList'
 
 class Post extends Component {
   formatDate(timestamp) {
@@ -20,6 +21,7 @@ class Post extends Component {
         <p>Vote Score: {post.voteScore}</p>
         <p>{post.category}</p>
         <p>{post.body}</p>
+        <CommentList postId={post.id} />
       </div>
     )
   }

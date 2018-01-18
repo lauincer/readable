@@ -14,3 +14,10 @@ export function fetchPosts() {
     API_HEADER
   ).then((res) => res.json())
 }
+
+export function fetchComments(postId) {
+  return fetch(
+    `${API_SERVER}posts/${postId}/comments`,
+    API_HEADER
+  ).then((res) => res.json())
+}

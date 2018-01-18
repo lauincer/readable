@@ -9,12 +9,14 @@ import App from './components/App'
 import registerServiceWorker from './registerServiceWorker';
 import { default as category } from './modules/categories/CategoryReducer'
 import { default as post } from './modules/posts/PostReducer'
+import { default as comment } from './modules/comments/CommentReducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const rootReducer = combineReducers({
   category,
   post,
+  comment
  })
 
 const store = createStore(
