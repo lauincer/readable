@@ -3,8 +3,9 @@ import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CategoryList from './../modules/categories/components/CategoryList'
 import PostList from './../modules/posts/components/PostList'
+import Post from './../modules/posts/components/Post'
 import { fetchCategories } from './../modules/categories/CategoryActions'
-import { fetchPosts, sortByScore, sortByDate } from './../modules/posts/PostActions'
+import { fetchPosts } from './../modules/posts/PostActions'
 
 class Root extends Component {
 
@@ -15,32 +16,36 @@ class Root extends Component {
  }
 
   render() {
-    console.log('Props', this.props);
-    const { category, post, sortByScore, sortByDate } = this.props;
+    const { category, post } = this.props;
 
     return (
       <div>
         <Route exact path="/" render={() => (
           <div>
             <CategoryList list={category.categoryList} />
-            <div>
-              <h4>Sort by:</h4>
-              <button onClick={() => sortByScore()}>Score</button>
-              <button onClick={() => sortByDate()}>Date</button>
-            </div>
             <PostList list={post.postList} />
           </div>
         )}/>
-        {category.categoryList && category.categoryList.map((cat) => (
+        {category.categoryList && post.postList && category.categoryList.map((cat) => (
           <Route exact path={`/${cat.name}`}
                  key={cat.name}
                  render={() => (
                   <div>
                     <h1>Category: {cat.name}</h1>
                     <CategoryList list={category.categoryList} />
-                    <PostList list={post.postList} category={cat.name} />
+                    <PostList list={post.postList.filter(post => (post.category === cat.name))}
+                              category={cat.name} />
                   </div>
           )}/>
+        ))}
+        {post.postList && post.postList
+          .filter(post => (post.deleted === false))
+          .map(post => (
+            <Route exact path={`/${post.category}/${post.id}`}
+                   key={`post-page-${post.id}`}
+                   render={() => (
+                    <Post post={post}/>
+            )}/>
         ))}
       </div>
     );
@@ -56,9 +61,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCategories: (data) => dispatch(fetchCategories()),
-    fetchPosts: (data) => dispatch(fetchPosts()),
-    sortByScore: (data) => dispatch(sortByScore()),
-    sortByDate: (data) => dispatch(sortByDate())
+    fetchPosts: (data) => dispatch(fetchPosts())
   }
 }
 
