@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CategoryList from './../modules/categories/components/CategoryList'
 import PostList from './../modules/posts/components/PostList'
 import Post from './../modules/posts/components/Post'
+import PostCreate from './../modules/posts/components/PostCreate'
 import { fetchCategories } from './../modules/categories/CategoryActions'
 import { fetchPosts } from './../modules/posts/PostActions'
 
@@ -47,6 +48,10 @@ class Root extends Component {
                     <Post post={post}/>
             )}/>
         ))}
+        <Route exact path='/create'
+               render={() => (
+                <PostCreate />
+        )}/>
       </div>
     );
   }

@@ -29,14 +29,18 @@ export function sortByDate () {
   }
 }
 
-export function addPost ({ day, recipe, meal }) {
+export function addPost (post) {
   return {
     type: ADD_POST,
-    recipe,
-    day,
-    meal,
+    post
   }
 }
+
+export const postPost = (data) => dispatch => (
+  ReadableAPIUtil
+      .addPost(data)
+      .then(posts => dispatch(addPost(data)))
+);
 
 export function removePost ({ day, meal }) {
   return {

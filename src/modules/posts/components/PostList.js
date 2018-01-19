@@ -12,7 +12,11 @@ class PostList extends Component {
           <h2 className='subheader'>
             Posts
           </h2>
-          <a>+ Add New Post</a>
+          <Link to={{
+            pathname: '/create'
+          }}>
+            + Add New Post
+          </Link>
           <div>
             <h4>Sort by:</h4>
             <button onClick={() => sortByScore()}>Score</button>

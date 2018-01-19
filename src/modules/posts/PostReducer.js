@@ -17,19 +17,20 @@ function post (state = {}, action) {
       return {
         ...state,
         postList: state.postList.sort((a,b) => (
-          a.voteScore > b.voteScore
+          b.voteScore - a.voteScore
         ))
       }
     case SORT_BY_DATE :
       return {
         ...state,
         postList: state.postList.sort((a,b) => (
-          a.timestamp > b.timestamp
+          b.timestamp - a.timestamp
         ))
       }
     case ADD_POST :
       return {
-        ...state
+        ...state,
+        postList: state.postList.concat(action.post)
       }
     case REMOVE_POST :
       return {

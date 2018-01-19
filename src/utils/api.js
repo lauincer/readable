@@ -1,23 +1,34 @@
 const API_SERVER = 'http://localhost:3001/';
-const API_HEADER = {headers: { 'Authorization': 'whatever-you-want' }};
+const API_AUTHORIZATION = { 'Authorization': 'whatever-you-want' };
 
 export function fetchCategories() {
   return fetch(
     `${API_SERVER}categories`,
-    API_HEADER
+    {headers: API_AUTHORIZATION}
   ).then((res) => res.json())
 }
 
 export function fetchPosts() {
   return fetch(
     `${API_SERVER}posts`,
-    API_HEADER
+    {headers: API_AUTHORIZATION}
   ).then((res) => res.json())
 }
 
 export function fetchComments(postId) {
   return fetch(
     `${API_SERVER}posts/${postId}/comments`,
-    API_HEADER
+    {headers: API_AUTHORIZATION}
   ).then((res) => res.json())
+}
+
+export function addPost(data) {
+  return fetch(`${API_SERVER}posts`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: new Headers({
+      'Authorization': 'whatever-you-want',
+      'Content-Type': 'application/json'
+    })
+  }).then(res => res.json())
 }
