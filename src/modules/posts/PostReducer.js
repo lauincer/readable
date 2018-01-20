@@ -3,6 +3,7 @@ import {
   SORT_BY_SCORE,
   SORT_BY_DATE,
   ADD_POST,
+  EDIT_POST,
   REMOVE_POST
 } from './PostActions'
 
@@ -34,7 +35,10 @@ function post (state = {}, action) {
       }
     case REMOVE_POST :
       return {
-        ...state
+        ...state,
+        postList: state.postList.filter(post =>
+          post.postId !== action.postId
+        )
       }
     default :
       return state
