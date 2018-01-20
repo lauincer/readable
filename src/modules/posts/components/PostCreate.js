@@ -37,11 +37,15 @@ class PostCreate extends Component {
           Create New Post
         </h2>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <input type='text' ref={(domNode) => { this.title = domNode }} />
-           <input type='text' ref={(domNode) => { this.body = domNode }} />
-           <input type='text' ref={(domNode) => { this.author = domNode }} />
-           <input type='text' ref={(domNode) => { this.category = domNode }} />
-           <input type='submit' value='Add Post'/>
+            <label>Title</label>
+            <input type='text' ref={(domNode) => { this.title = domNode }} />
+            <label>Body</label>
+            <input type='text' ref={(domNode) => { this.body = domNode }} />
+            <label>Author</label>
+            <input type='text' ref={(domNode) => { this.author = domNode }} />
+            <label>Category</label>
+            <input type='text' ref={(domNode) => { this.category = domNode }} />
+            <input type='submit' value='Add Post'/>
         </form>
       </div>
     )
