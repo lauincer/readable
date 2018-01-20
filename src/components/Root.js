@@ -35,7 +35,7 @@ class Root extends Component {
                     <h1>Category: {cat.name}</h1>
                     <CategoryList list={category.categoryList} />
                     <PostList list={post.postList.filter(post => (post.category === cat.name))}
-                              category={cat.name} />
+                              categoryName={cat.name} />
                   </div>
           )}/>
         ))}
@@ -49,8 +49,8 @@ class Root extends Component {
             )}/>
         ))}
         <Route exact path='/create'
-               render={() => (
-                <PostCreate />
+               render={props => (
+                <PostCreate categoryName={props.location.state.categoryName}/>
         )}/>
       </div>
     );

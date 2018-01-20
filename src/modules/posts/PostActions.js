@@ -13,22 +13,22 @@ export const fetchPosts = () => dispatch => (
       .then(posts => dispatch(receivePosts(posts)))
 );
 
-export const postPost = (data) => dispatch => (
+export const addPost = (data) => dispatch => (
   ReadableAPIUtil
       .addPost(data)
-      .then(post => dispatch(addPost(post)))
+      .then(post => dispatch(receivePost(post)))
 );
 
-export const putPost = (postId, data) => dispatch => (
+export const editPost = (postId, data) => dispatch => (
   ReadableAPIUtil
       .editPost(postId, data)
-      .then(post => dispatch(editPost(post)))
+      .then(post => dispatch(receiveEditedPost(post)))
 );
 
 export const deletePost = (postId) => dispatch => (
   ReadableAPIUtil
       .deletePost(postId)
-      .then(postId => dispatch(removePost(postId)))
+      .then(postId => dispatch(receiveDeletedPost(postId)))
 );
 
 
@@ -37,10 +37,24 @@ export const receivePosts = posts => ({
   posts
 });
 
-export function addPost (post) {
+export function receivePost (post) {
   return {
     type: ADD_POST,
     post
+  }
+}
+
+export function receiveEditedPost (post) {
+  return {
+    type: EDIT_POST,
+    post
+  }
+}
+
+export function receiveDeletedPost ({ postId }) {
+  return {
+    type: REMOVE_POST,
+    postId
   }
 }
 
@@ -53,19 +67,5 @@ export function sortByScore () {
 export function sortByDate () {
   return {
     type: SORT_BY_DATE
-  }
-}
-
-export function editPost (post) {
-  return {
-    type: EDIT_POST,
-    post
-  }
-}
-
-export function removePost ({ postId }) {
-  return {
-    type: REMOVE_POST,
-    postId
   }
 }

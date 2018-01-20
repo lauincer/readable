@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { postPost } from './../PostActions'
+import { addPost } from './../PostActions'
 import { generateId } from '../../../utils/utils';
 
 class PostCreate extends Component {
@@ -26,6 +26,7 @@ class PostCreate extends Component {
 
   render() {
     const { redirect } = this.state;
+    const { categoryName } = this.props;
 
      if (redirect) {
        return <Redirect to='/'/>;
@@ -44,7 +45,8 @@ class PostCreate extends Component {
             <label>Author</label>
             <input type='text' ref={(domNode) => { this.author = domNode }} />
             <label>Category</label>
-            <input type='text' ref={(domNode) => { this.category = domNode }} />
+            <input type='text' ref={(domNode) => { this.category = domNode }}
+                   defaultValue={categoryName ? categoryName : ''}/>
             <input type='submit' value='Add Post'/>
         </form>
       </div>
@@ -60,7 +62,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addPost: (data) => dispatch(postPost(data))
+    addPost: (data) => dispatch(addPost(data))
   }
 }
 

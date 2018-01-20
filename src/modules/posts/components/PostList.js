@@ -5,7 +5,7 @@ import { sortByScore, sortByDate } from './../PostActions'
 
 class PostList extends Component {
   render() {
-    const { list, sortByScore, sortByDate } = this.props;
+    const { list, sortByScore, sortByDate, categoryName } = this.props;
 
     return (
         <div className='post-list'>
@@ -13,7 +13,8 @@ class PostList extends Component {
             Posts
           </h2>
           <Link to={{
-            pathname: '/create'
+            pathname: '/create',
+            state: { 'categoryName': categoryName }
           }}>
             + Add New Post
           </Link>
