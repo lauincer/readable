@@ -17,40 +17,42 @@ class Root extends Component {
  }
 
   render() {
-    const { category, post } = this.props;
+    const { category, posts } = this.props;
 
     return (
       <div>
         <Route exact path="/" render={() => (
           <div>
             <CategoryList list={category.categoryList} />
-            <PostList list={post.postList} />
+            <PostList list={posts.postList} />
           </div>
         )}/>
-        {category.categoryList && post.postList && category.categoryList.map((cat) => (
+        {category.categoryList && posts.postList && category.categoryList.map((cat) => (
           <Route exact path={`/${cat.name}`}
                  key={cat.name}
                  render={() => (
                   <div>
                     <h1>Category: {cat.name}</h1>
                     <CategoryList list={category.categoryList} />
-                    <PostList list={post.postList.filter(post => (post.category === cat.name))}
+                    <PostList list={posts.postList.filter(post => (post.category === cat.name))}
                               categoryName={cat.name} />
                   </div>
           )}/>
         ))}
-        {post.postList && post.postList
+        {posts.postList && posts.postList
           .filter(post => (post.deleted === false))
           .map(post => (
             <Route exact path={`/${post.category}/${post.id}`}
                    key={`post-page-${post.id}`}
                    render={() => (
-                    <Post post={post}/>
+                    <Post post={post} />
             )}/>
         ))}
         <Route exact path='/create'
                render={props => (
-                <PostCreate categoryName={props.location.state.categoryName}/>
+                <PostCreate
+                  categoryName={props.location.state.categoryName}
+                  postId={props.location.state.postId} />
         )}/>
       </div>
     );

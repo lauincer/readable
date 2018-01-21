@@ -37,7 +37,7 @@ function post (state = {}, action) {
       return {
         ...state,
         postList: state.postList.filter(post =>
-          post.postId !== action.postId
+          post.id !== action.postId
         )
       }
     default :

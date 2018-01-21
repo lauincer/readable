@@ -51,10 +51,10 @@ export function receiveEditedPost (post) {
   }
 }
 
-export function receiveDeletedPost ({ postId }) {
+export function receiveDeletedPost (post) {
   return {
     type: REMOVE_POST,
-    postId
+    postId: post.id
   }
 }
 

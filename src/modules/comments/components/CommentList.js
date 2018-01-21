@@ -9,15 +9,15 @@ class CommentList extends Component {
   }
 
   render() {
-    const { comment } = this.props;
+    const { comments } = this.props;
 
     return (
         <div className='comment-list'>
           <h2 className='subheader'>
-            Comments: ({comment.commentList ? comment.commentList.length : 0})
+            Comments: ({comments.commentList ? comments.commentList.length : 0})
           </h2>
           <ul>
-            {comment.commentList && comment.commentList.map((comment) => (
+            {comments.commentList && comments.commentList.map((comment) => (
               <li key={comment.id}>
                 <h3>{comment.title}</h3>
                 <p>{comment.author}</p>
