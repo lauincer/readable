@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom'
-import { addPost } from './../PostActions'
+import { addPost, editPost } from './../PostActions'
 import { generateId } from '../../../utils/utils';
 
 class PostCreate extends Component {
@@ -10,23 +10,33 @@ class PostCreate extends Component {
   }
 
   handleSubmit(event) {
-    const { addPost } = this.props;
+    const { post, addPost, editPost } = this.props;
 
-    addPost({
-      id: generateId(),
-      timestamp: Date.now(),
-      title: this.title.value,
-      body: this.body.value,
-      author: this.author.value,
-      category: this.category.value
-    });
+    if (post) {
+      editPost(
+        post.id,
+        {
+          title: this.title.value,
+          body: this.body.value
+        }
+      );
+    } else {
+      addPost({
+        id: generateId(),
+        timestamp: Date.now(),
+        title: this.title.value,
+        body: this.body.value,
+        author: this.author.value,
+        category: this.category.value
+      });
+    }
 
     this.setState({ redirect: true });
   }
 
   render() {
     const { redirect } = this.state;
-    const { categoryName } = this.props;
+    const { categoryName, post } = this.props;
 
      if (redirect) {
        return <Redirect to='/'/>;
@@ -35,19 +45,22 @@ class PostCreate extends Component {
     return (
       <div className='post-create'>
         <h2 className='subheader'>
-          Create New Post
+          {post ? 'Edit Post' : 'Create New Post'}
         </h2>
         <form onSubmit={this.handleSubmit.bind(this)}>
             <label>Title</label>
-            <input type='text' ref={(domNode) => { this.title = domNode }} />
+            <input type='text' ref={(domNode) => { this.title = domNode }}
+                   defaultValue={post ? post.title : ''} />
             <label>Body</label>
-            <input type='text' ref={(domNode) => { this.body = domNode }} />
+            <input type='text' ref={(domNode) => { this.body = domNode }}
+                   defaultValue={post ? post.body : ''} />
             <label>Author</label>
-            <input type='text' ref={(domNode) => { this.author = domNode }} />
+            <input type='text' ref={(domNode) => { this.author = domNode }}
+                   defaultValue={post ? post.author : ''} />
             <label>Category</label>
             <input type='text' ref={(domNode) => { this.category = domNode }}
-                   defaultValue={categoryName ? categoryName : ''}/>
-            <input type='submit' value='Add Post'/>
+                   defaultValue={post ? post.category : (categoryName ? categoryName : '')} />
+            <input type='submit' value={post ? 'Edit Post' : 'Add Post'}/>
         </form>
       </div>
     )
@@ -62,7 +75,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addPost: (data) => dispatch(addPost(data))
+    addPost: (data) => dispatch(addPost(data)),
+    editPost: (postId, data) => dispatch(editPost(postId, data))
   }
 }
 

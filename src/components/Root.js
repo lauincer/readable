@@ -51,8 +51,12 @@ class Root extends Component {
         <Route exact path='/create'
                render={props => (
                 <PostCreate
-                  categoryName={props.location.state.categoryName}
-                  postId={props.location.state.postId} />
+                  categoryName={props.location.state.categoryName} />
+        )}/>
+        <Route exact path='/edit'
+               render={props => (
+                <PostCreate
+                  post={props.location.state ? props.location.state.post : null} />
         )}/>
       </div>
     );

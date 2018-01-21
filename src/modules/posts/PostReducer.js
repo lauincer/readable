@@ -33,6 +33,16 @@ function post (state = {}, action) {
         ...state,
         postList: state.postList.concat(action.post)
       }
+    case EDIT_POST :
+      return {
+        ...state,
+        postList: state.postList.map((post) => {
+          if (post.id === action.post.id) {
+            return action.post;
+          }
+          return post;
+        })
+      }
     case REMOVE_POST :
       return {
         ...state,

@@ -28,7 +28,7 @@ export const editPost = (postId, data) => dispatch => (
 export const deletePost = (postId) => dispatch => (
   ReadableAPIUtil
       .deletePost(postId)
-      .then(postId => dispatch(receiveDeletedPost(postId)))
+      .then(post => dispatch(receiveDeletedPost(post)))
 );
 
 

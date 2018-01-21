@@ -35,8 +35,8 @@ class Post extends Component {
         </h2>
         <button onClick={() => this.removePost()}>Delete</button>
         <Link to={{
-          pathname: '/create',
-          state: { 'postId': post.id }
+          pathname: '/edit',
+          state: { 'post': post }
         }}>Edit</Link>
         <p>{this.formatDate(post.timestamp)}</p>
         <p>Author: {post.author}</p>
