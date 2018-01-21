@@ -34,22 +34,27 @@ class Post extends Component {
      }
 
     return (
-      <div className='post'>
-        <h2 className='subheader'>
+      <div className='content'>
+        <h1>
           {post.title}
-        </h2>
-        <button onClick={() => this.removePost()}>Delete</button>
-        <p>Vote: </p>
-        <button onClick={() => this.votePost('upVote')}>:)</button>
-        <button onClick={() => this.votePost('downVote')}>:(</button>
-        <Link to={{
+        </h1>
+        <hr/>
+        <button className='btn btn--left' onClick={() => this.removePost()}>Delete</button>
+        <Link className='btn btn--small' to={{
           pathname: '/edit',
           state: { 'post': post }
         }}>Edit</Link>
+        <p className='block'>
+          Vote:&nbsp;
+          <button className='btn btn--left btn--vote' onClick={() => this.votePost('upVote')}>:)</button>
+          <button className='btn btn--vote' onClick={() => this.votePost('downVote')}>:(</button>
+        </p>
         <p>{this.formatDate(post.timestamp)}</p>
-        <p>Author: {post.author}</p>
-        <p>Vote Score: {post.voteScore}</p>
-        <p>{post.category}</p>
+        <p className='author'>by {post.author}</p>
+        <p className='score'>score: {post.voteScore}</p>
+        <p className='category'>
+          Category: <span className='category-name'>{post.category}</span>
+        </p>
         <p>{post.body}</p>
         <CommentList postId={post.id} />
       </div>

@@ -39,14 +39,18 @@ class PostCreate extends Component {
     const { categoryName, post } = this.props;
 
      if (redirect) {
-       return <Redirect to='/'/>;
+       if (post) {
+         return <Redirect to={`/${post.category}/${post.id}`} />;
+       }
+       return <Redirect to='/' />;
      }
 
     return (
-      <div className='post-create'>
-        <h2 className='subheader'>
+      <div className='content'>
+        <h1>
           {post ? 'Edit Post' : 'Create New Post'}
-        </h2>
+        </h1>
+        <hr/>
         <form onSubmit={this.handleSubmit.bind(this)}>
             <label>Title</label>
             <input type='text' ref={(domNode) => { this.title = domNode }}
@@ -63,7 +67,7 @@ class PostCreate extends Component {
                    defaultValue={categoryName ? categoryName : ''}/>
               </div>
             }
-            <input type='submit' value={post ? 'Edit Post' : 'Add Post'}/>
+            <input className='btn' type='submit' value={post ? 'Edit Post' : 'Add Post'}/>
         </form>
       </div>
     )

@@ -8,33 +8,38 @@ class PostList extends Component {
     const { list, sortByScore, sortByDate, categoryName } = this.props;
 
     return (
-        <div className='post-list'>
-          <h2 className='subheader'>
-            Posts
-          </h2>
-          <Link to={{
+        <div className='content'>
+          <h1>
+            {categoryName ? categoryName : ''} Posts
+          </h1>
+          <hr />
+          <Link className='btn' to={{
             pathname: '/create',
             state: { 'categoryName': categoryName }
           }}>
             + Add New Post
           </Link>
-          <div>
+          <div className="block">
             <h4>Sort by:</h4>
-            <button onClick={() => sortByScore()}>Score</button>
-            <button onClick={() => sortByDate()}>Date</button>
+            <button className='btn btn--left' onClick={() => sortByScore()}>Score</button>
+            <button className='btn' onClick={() => sortByDate()}>Date</button>
           </div>
-          <ul>
+          <ul className='post-list'>
             {list && list.map((post) => (
               <li key={`post-${post.id}`}>
                 <Link to={{
                   pathname: `/${post.category}/${post.id}`
                 }}>
-                  <h3>{post.title}</h3>
+                  <h2>{post.title}</h2>
                 </Link>
-                <p>{post.author}</p>
-                <p>{post.voteScore}</p>
-                <p>{new Date(post.timestamp).toDateString()}</p>
-                <p>{post.category}</p>
+                <p className='post-header'>
+                  <span className='date'>{new Date(post.timestamp).toDateString()}</span>
+                  <span className='author'>by {post.author}</span>
+                  <span className='score'>score: {post.voteScore}</span>
+                </p>
+                <p className='category'>
+                  Category: <span className='category-name'>{post.category}</span>
+                </p>
               </li>
             ))}
           </ul>

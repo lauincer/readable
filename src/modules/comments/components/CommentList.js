@@ -52,16 +52,19 @@ class CommentList extends Component {
         <li key={comment.id}>
           <h3>
             {comment.title}
-            <button onClick={() => this.editComment(comment.id)}>Edit</button>
-            <button onClick={() => this.deleteComment(comment.id)}>Delete</button>
+            <button className='btn btn--left' onClick={() => this.editComment(comment.id)}>Edit</button>
+            <button className='btn' onClick={() => this.deleteComment(comment.id)}>Delete</button>
           </h3>
-          <p>Vote: </p>
-          <button onClick={() => this.voteComment(comment.id, 'upVote')}>:)</button>
-          <button onClick={() => this.voteComment(comment.id, 'downVote')}>:(</button>
-          <p>{comment.author}</p>
-          <p>{comment.voteScore}</p>
+          <p className='block'>
+            Vote:&nbsp;
+            <button className='btn btn--left btn--vote' onClick={() => this.voteComment(comment.id, 'upVote')}>:)</button>
+            <button className='btn btn--vote' onClick={() => this.voteComment(comment.id, 'downVote')}>:(</button>
+          </p>
+          <p className='author'>by {comment.author}</p>
+          <p className='score'>score: {comment.voteScore}</p>
           <p>{comment.category}</p>
           <p>{comment.body}</p>
+          <hr/>
         </li>
       )
     }
@@ -72,16 +75,16 @@ class CommentList extends Component {
     const { showAddForm } = this.state;
 
     return (
-        <div className='comment-list'>
-          <h2 className='subheader'>
-            Comments: ({comments.commentList ? comments.commentList.length : 0})
-          </h2>
+        <div className='comments-block'>
+          <h2>Comments: ({comments.commentList ? comments.commentList.length : 0})</h2>
           <ul>
             {comments.commentList && comments.commentList.map((comment) => (
               this.renderComment(comment)
             ))}
           </ul>
-          <button onClick={() => this.addComment()}>+ Add New Comment</button>
+          {!showAddForm &&
+            <button className='btn' onClick={() => this.addComment()}>+ Add New Comment</button>
+          }
           {showAddForm &&
             <CommentCreate postId={postId} />
           }

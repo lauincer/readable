@@ -30,10 +30,8 @@ class CommentCreate extends Component {
     const { comment } = this.props;
 
     return (
-      <div className='post-create'>
-        <h2 className='subheader'>
-          {comment ? 'Edit Comment' : 'Create New Comment'}
-        </h2>
+      <div className='block'>
+        <h3>{comment ? 'Edit Comment' : 'Create New Comment'}</h3>
         <form onSubmit={this.handleSubmit.bind(this)}>
             <label>Body</label>
             <input type='text' ref={(domNode) => { this.body = domNode }}
@@ -44,8 +42,9 @@ class CommentCreate extends Component {
                 <input type='text' ref={(domNode) => { this.author = domNode }} />
               </div>
             }
-            <input type='submit' value={comment ? 'Save' : 'Add Comment'}/>
+            <input className='btn' type='submit' value={comment ? 'Save' : 'Add Comment'}/>
         </form>
+        <hr/>
       </div>
     )
   }

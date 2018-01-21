@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font: 1em/1.2 "Helvetica Neue",Helvetica,Arial,Geneva,sans-serif;
 }
 
 ul {
@@ -10,4 +10,60 @@ ul {
 
 li {
     list-style: none;
+}
+
+form input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+form input[type='text'] {
+  padding: 7px;
+  width: 80%;
+}
+
+@media (min-width: 42em) {
+  form input[type='text'] {
+    width: 50%;
+  }
+
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.1;
+  font-weight: 500;
+  margin: 0 0 0.5em;
+}
+
+h1 {
+    font-size: 2.25em;
+}
+
+h2 {
+    font-size: 1.75em;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+hr {
+    height: 0;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+p {
+    margin: 0 0 1em;
+    line-height: 1.5;
+}
+
+label {
+  color: #666;
 }

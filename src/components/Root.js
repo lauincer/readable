@@ -32,8 +32,8 @@ class Root extends Component {
                  key={cat.name}
                  render={() => (
                   <div>
-                    <h1>Category: {cat.name}</h1>
                     <CategoryList list={category.categoryList} />
+                    <h2 className='category-title'>{cat.name}</h2>
                     <PostList list={posts.postList.filter(post => (post.category === cat.name))}
                               categoryName={cat.name} />
                   </div>
