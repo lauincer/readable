@@ -44,7 +44,7 @@ class CommentCreate extends Component {
                 <input type='text' ref={(domNode) => { this.author = domNode }} />
               </div>
             }
-            <input type='submit' value={comment ? 'Edit Comment' : 'Add Comment'}/>
+            <input type='submit' value={comment ? 'Save' : 'Add Comment'}/>
         </form>
       </div>
     )
