@@ -8,6 +8,10 @@ class CommentList extends Component {
       this.props.fetchComments(this.props.postId);
   }
 
+  addComment() {
+    
+  }
+
   render() {
     const { comments } = this.props;
 
@@ -27,7 +31,7 @@ class CommentList extends Component {
               </li>
             ))}
           </ul>
-          <a>+ Add New Comment</a>
+          <button onClick={() => this.addComment()}>+ Add New Comment</button>
         </div>
     )
   }

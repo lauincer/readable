@@ -34,23 +34,17 @@ export const receiveComments = comments => ({
   comments
 });
 
-export function receiveComment (comment) {
-  return {
-    type: ADD_COMMENT,
-    comment
-  }
-}
+export const receiveComment = comment => ({
+  type: ADD_COMMENT,
+  comment
+});
 
-export function receiveEditedComment (comment) {
-  return {
+export const receiveEditedComment = comment => ({
     type: EDIT_COMMENT,
     comment
-  }
-}
+});
 
-export function receiveDeletedComment (comment) {
-  return {
+export const receiveDeletedComment = comment => ({
     type: REMOVE_COMMENT,
     commentId: comment.id
-  }
-}
+});

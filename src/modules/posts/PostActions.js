@@ -37,35 +37,25 @@ export const receivePosts = posts => ({
   posts
 });
 
-export function receivePost (post) {
-  return {
+export const receivePost = post => ({
     type: ADD_POST,
     post
-  }
-}
+});
 
-export function receiveEditedPost (post) {
-  return {
-    type: EDIT_POST,
-    post
-  }
-}
+export const receiveEditedPost = post => ({
+  type: EDIT_POST,
+  post
+});
 
-export function receiveDeletedPost (post) {
-  return {
-    type: REMOVE_POST,
-    postId: post.id
-  }
-}
+export const receiveDeletedPost = post => ({
+  type: REMOVE_POST,
+  postId: post.id
+});
 
-export function sortByScore () {
-  return {
+export const sortByScore = () => ({
     type: SORT_BY_SCORE
-  }
-}
+});
 
-export function sortByDate () {
-  return {
+export const sortByDate = () => ({
     type: SORT_BY_DATE
-  }
-}
+});

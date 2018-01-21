@@ -59,7 +59,8 @@ class PostCreate extends Component {
                 <label>Author</label>
                 <input type='text' ref={(domNode) => { this.author = domNode }} />
                 <label>Category</label>
-                <input type='text' ref={(domNode) => { this.category = domNode }} />
+                <input type='text' ref={(domNode) => { this.category = domNode }}
+                   defaultValue={categoryName ? categoryName : ''}/>
               </div>
             }
             <input type='submit' value={post ? 'Edit Post' : 'Add Post'}/>
