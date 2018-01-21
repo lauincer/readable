@@ -1,6 +1,6 @@
 import * as ReadableAPIUtil from '../../utils/api';
 
-export const RECEIVE_POSTS = "RECEIVE_POSTS";
+export const RECEIVE_POSTS = "RECEIVE_POSTS"
 export const ADD_POST = 'ADD_POST'
 export const EDIT_POST = 'EDIT_POST'
 export const REMOVE_POST = 'REMOVE_POST'

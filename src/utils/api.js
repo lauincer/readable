@@ -50,3 +50,32 @@ export function deletePost(postId) {
     headers: API_AUTHORIZATION
   }).then(res => res.json())
 }
+
+export function addComment(data) {
+  return fetch(`${API_SERVER}comments`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      ...API_AUTHORIZATION,
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+}
+
+export function editComment(commentId, data) {
+  return fetch(`${API_SERVER}comments/${commentId}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+      ...API_AUTHORIZATION,
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+}
+
+export function deleteComment(commentId) {
+  return fetch(`${API_SERVER}comments/${commentId}`, {
+    method: 'DELETE',
+    headers: API_AUTHORIZATION
+  }).then(res => res.json())
+}
