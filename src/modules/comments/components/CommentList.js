@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchComments } from './../CommentActions'
+import { fetchComments, deleteComment } from './../CommentActions'
 import CommentCreate from './CommentCreate'
 
 class CommentList extends Component {
@@ -26,6 +26,11 @@ class CommentList extends Component {
     });
   }
 
+  deleteComment(commentId) {
+    const { deleteComment } = this.props;
+    deleteComment(commentId);
+  }
+
   showEditForm(commentId) {
     return this.state.showEditFormId === commentId;
   }
@@ -43,6 +48,7 @@ class CommentList extends Component {
           <h3>
             {comment.title}
             <button onClick={() => this.editComment(comment.id)}>Edit</button>
+            <button onClick={() => this.deleteComment(comment.id)}>Delete</button>
           </h3>
           <p>{comment.author}</p>
           <p>{comment.voteScore}</p>
@@ -84,7 +90,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchComments: (postId) => dispatch(fetchComments(postId))
+    fetchComments: (postId) => dispatch(fetchComments(postId)),
+    deleteComment: (data) => dispatch(deleteComment(data))
   }
 }
 
