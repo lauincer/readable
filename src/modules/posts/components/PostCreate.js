@@ -54,12 +54,14 @@ class PostCreate extends Component {
             <label>Body</label>
             <input type='text' ref={(domNode) => { this.body = domNode }}
                    defaultValue={post ? post.body : ''} />
-            <label>Author</label>
-            <input type='text' ref={(domNode) => { this.author = domNode }}
-                   defaultValue={post ? post.author : ''} />
-            <label>Category</label>
-            <input type='text' ref={(domNode) => { this.category = domNode }}
-                   defaultValue={post ? post.category : (categoryName ? categoryName : '')} />
+           {!post &&
+             <div>
+                <label>Author</label>
+                <input type='text' ref={(domNode) => { this.author = domNode }} />
+                <label>Category</label>
+                <input type='text' ref={(domNode) => { this.category = domNode }} />
+              </div>
+            }
             <input type='submit' value={post ? 'Edit Post' : 'Add Post'}/>
         </form>
       </div>
