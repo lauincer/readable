@@ -25,6 +25,12 @@ export const editPost = (postId, data) => dispatch => (
       .then(post => dispatch(receiveEditedPost(post)))
 );
 
+export const votePost = (postId, data) => dispatch => (
+  ReadableAPIUtil
+      .votePost(postId, data)
+      .then(post => dispatch(receiveEditedPost(post)))
+);
+
 export const deletePost = (postId) => dispatch => (
   ReadableAPIUtil
       .deletePost(postId)

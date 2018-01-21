@@ -44,6 +44,17 @@ export function editPost(postId, data) {
   }).then(res => res.json())
 }
 
+export function votePost(postId, data) {
+  return fetch(`${API_SERVER}posts/${postId}`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      ...API_AUTHORIZATION,
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+}
+
 export function deletePost(postId) {
   return fetch(`${API_SERVER}posts/${postId}`, {
     method: 'DELETE',
@@ -65,6 +76,17 @@ export function addComment(data) {
 export function editComment(commentId, data) {
   return fetch(`${API_SERVER}comments/${commentId}`, {
     method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+      ...API_AUTHORIZATION,
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+}
+
+export function voteComment(commentId, data) {
+  return fetch(`${API_SERVER}comments/${commentId}`, {
+    method: 'POST',
     body: JSON.stringify(data),
     headers: {
       ...API_AUTHORIZATION,

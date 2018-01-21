@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import { deletePost } from './../PostActions';
+import { deletePost, votePost } from './../PostActions';
 import CommentList from './../../comments/components/CommentList'
 
 class Post extends Component {
@@ -20,6 +20,11 @@ class Post extends Component {
     this.setState({ redirect: true });
   }
 
+  votePost(vote) {
+    const { post, votePost } = this.props;
+    votePost(post.id, { option: vote });
+  }
+
   render() {
     const { post } = this.props;
     const { redirect } = this.state;
@@ -34,6 +39,9 @@ class Post extends Component {
           {post.title}
         </h2>
         <button onClick={() => this.removePost()}>Delete</button>
+        <p>Vote: </p>
+        <button onClick={() => this.votePost('upVote')}>:)</button>
+        <button onClick={() => this.votePost('downVote')}>:(</button>
         <Link to={{
           pathname: '/edit',
           state: { 'post': post }
@@ -57,7 +65,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deletePost: (data) => dispatch(deletePost(data))
+    deletePost: (data) => dispatch(deletePost(data)),
+    votePost: (postId, data) => dispatch(votePost(postId, data))
   }
 }
 

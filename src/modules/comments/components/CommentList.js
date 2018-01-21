@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchComments, deleteComment } from './../CommentActions'
+import { fetchComments, deleteComment, voteComment } from './../CommentActions'
 import CommentCreate from './CommentCreate'
 
 class CommentList extends Component {
@@ -31,6 +31,11 @@ class CommentList extends Component {
     deleteComment(commentId);
   }
 
+  voteComment(commentId, vote) {
+    const { voteComment } = this.props;
+    voteComment(commentId, { option: vote });
+  }
+
   showEditForm(commentId) {
     return this.state.showEditFormId === commentId;
   }
@@ -50,6 +55,9 @@ class CommentList extends Component {
             <button onClick={() => this.editComment(comment.id)}>Edit</button>
             <button onClick={() => this.deleteComment(comment.id)}>Delete</button>
           </h3>
+          <p>Vote: </p>
+          <button onClick={() => this.voteComment(comment.id, 'upVote')}>:)</button>
+          <button onClick={() => this.voteComment(comment.id, 'downVote')}>:(</button>
           <p>{comment.author}</p>
           <p>{comment.voteScore}</p>
           <p>{comment.category}</p>
@@ -91,7 +99,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchComments: (postId) => dispatch(fetchComments(postId)),
-    deleteComment: (data) => dispatch(deleteComment(data))
+    deleteComment: (data) => dispatch(deleteComment(data)),
+    voteComment: (commentId, data) => dispatch(voteComment(commentId, data))
   }
 }
 

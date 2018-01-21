@@ -29,6 +29,12 @@ export const deleteComment = (commentId) => dispatch => (
       .then(comment => dispatch(receiveDeletedComment(comment)))
 );
 
+export const voteComment = (commentId, data) => dispatch => (
+  ReadableAPIUtil
+      .voteComment(commentId, data)
+      .then(post => dispatch(receiveEditedComment(post)))
+);
+
 export const receiveComments = comments => ({
   type: RECEIVE_COMMENTS,
   comments
