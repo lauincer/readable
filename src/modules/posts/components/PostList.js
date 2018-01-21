@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { sortByScore, sortByDate } from './../PostActions'
+import { sortByScore, sortByDate, votePost } from './../PostActions'
 
 class PostList extends Component {
+  votePost(postId, vote) {
+    const { votePost } = this.props;
+    votePost(postId, { option: vote });
+  }
+
   render() {
     const { list, sortByScore, sortByDate, categoryName } = this.props;
 
@@ -40,6 +45,11 @@ class PostList extends Component {
                 <p className='category'>
                   Category: <span className='category-name'>{post.category}</span>
                 </p>
+                <p className='block'>
+                  Vote:&nbsp;
+                  <button className='btn btn--left btn--vote' onClick={() => this.votePost(post.id, 'upVote')}>:)</button>
+                  <button className='btn btn--vote' onClick={() => this.votePost(post.id, 'downVote')}>:(</button>
+                </p>
               </li>
             ))}
           </ul>
@@ -57,7 +67,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     sortByScore: (data) => dispatch(sortByScore()),
-    sortByDate: (data) => dispatch(sortByDate())
+    sortByDate: (data) => dispatch(sortByDate()),
+    votePost: (postId, data) => dispatch(votePost(postId, data))
   }
 }
 
