@@ -1,23 +1,18 @@
-import {
-  RECEIVE_COMMENTS,
-  ADD_COMMENT,
-  EDIT_COMMENT,
-  REMOVE_COMMENT
-} from './CommentActions'
+import * as types from './CommentActionTypes';
 
 function comment (state = {}, action) {
   switch (action.type) {
-    case RECEIVE_COMMENTS :
+    case types.RECEIVE_COMMENTS :
       return {
         ...state,
         commentList: action.comments
       }
-    case ADD_COMMENT :
+    case types.ADD_COMMENT :
       return {
         ...state,
         commentList: state.commentList.concat(action.comment)
       }
-    case EDIT_COMMENT :
+    case types.EDIT_COMMENT :
       return {
         ...state,
         commentList: state.commentList.map((comment) => {
@@ -27,7 +22,7 @@ function comment (state = {}, action) {
           return comment;
         })
       }
-    case REMOVE_COMMENT :
+    case types.REMOVE_COMMENT :
       return {
         ...state,
         commentList: state.commentList.filter(comment =>

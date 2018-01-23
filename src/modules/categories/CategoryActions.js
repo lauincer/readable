@@ -1,6 +1,5 @@
 import * as ReadableAPIUtil from '../../utils/api';
-
-export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
+import { RECEIVE_CATEGORIES } from './CategoryActionTypes';
 
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,

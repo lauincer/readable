@@ -1,6 +1,4 @@
-import {
-  RECEIVE_CATEGORIES
-} from './CategoryActions'
+import { RECEIVE_CATEGORIES } from './CategoryActionTypes';
 
 function category (state = {}, action) {
   switch (action.type) {

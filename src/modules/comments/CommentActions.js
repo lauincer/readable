@@ -1,9 +1,5 @@
 import * as ReadableAPIUtil from '../../utils/api';
-
-export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
-export const ADD_COMMENT = 'ADD_COMMENT'
-export const EDIT_COMMENT = 'EDIT_COMMENT'
-export const REMOVE_COMMENT = 'REMOVE_COMMENT'
+import * as types from './CommentActionTypes';
 
 export const fetchComments = (postId) => dispatch => (
   ReadableAPIUtil
@@ -36,21 +32,21 @@ export const voteComment = (commentId, data) => dispatch => (
 );
 
 export const receiveComments = comments => ({
-  type: RECEIVE_COMMENTS,
+  type: types.RECEIVE_COMMENTS,
   comments
 });
 
 export const receiveComment = comment => ({
-  type: ADD_COMMENT,
+  type: types.ADD_COMMENT,
   comment
 });
 
 export const receiveEditedComment = comment => ({
-    type: EDIT_COMMENT,
+    type: types.EDIT_COMMENT,
     comment
 });
 
 export const receiveDeletedComment = comment => ({
-    type: REMOVE_COMMENT,
+    type: types.REMOVE_COMMENT,
     commentId: comment.id
 });

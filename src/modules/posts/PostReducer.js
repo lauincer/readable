@@ -1,39 +1,32 @@
-import {
-  RECEIVE_POSTS,
-  SORT_BY_SCORE,
-  SORT_BY_DATE,
-  ADD_POST,
-  EDIT_POST,
-  REMOVE_POST
-} from './PostActions'
+import * as types from './PostActionTypes';
 
 function post (state = {}, action) {
   switch (action.type) {
-    case RECEIVE_POSTS :
+    case types.RECEIVE_POSTS :
       return {
         ...state,
         postList: action.posts
       }
-    case SORT_BY_SCORE :
+    case types.SORT_BY_SCORE :
       return {
         ...state,
         postList: state.postList.sort((a,b) => (
           b.voteScore - a.voteScore
         ))
       }
-    case SORT_BY_DATE :
+    case types.SORT_BY_DATE :
       return {
         ...state,
         postList: state.postList.sort((a,b) => (
           b.timestamp - a.timestamp
         ))
       }
-    case ADD_POST :
+    case types.ADD_POST :
       return {
         ...state,
         postList: state.postList.concat(action.post)
       }
-    case EDIT_POST :
+    case types.EDIT_POST :
       return {
         ...state,
         postList: state.postList.map((post) => {
@@ -43,7 +36,7 @@ function post (state = {}, action) {
           return post;
         })
       }
-    case REMOVE_POST :
+    case types.REMOVE_POST :
       return {
         ...state,
         postList: state.postList.filter(post =>

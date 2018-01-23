@@ -1,11 +1,5 @@
 import * as ReadableAPIUtil from '../../utils/api';
-
-export const RECEIVE_POSTS = "RECEIVE_POSTS"
-export const ADD_POST = 'ADD_POST'
-export const EDIT_POST = 'EDIT_POST'
-export const REMOVE_POST = 'REMOVE_POST'
-export const SORT_BY_SCORE = 'SORT_BY_SCORE'
-export const SORT_BY_DATE = 'SORT_BY_DATE'
+import * as types from './PostActionTypes';
 
 export const fetchPosts = () => dispatch => (
   ReadableAPIUtil
@@ -39,29 +33,29 @@ export const deletePost = (postId) => dispatch => (
 
 
 export const receivePosts = posts => ({
-  type: RECEIVE_POSTS,
+  type: types.RECEIVE_POSTS,
   posts
 });
 
 export const receivePost = post => ({
-    type: ADD_POST,
+    type: types.ADD_POST,
     post
 });
 
 export const receiveEditedPost = post => ({
-  type: EDIT_POST,
+  type: types.EDIT_POST,
   post
 });
 
 export const receiveDeletedPost = post => ({
-  type: REMOVE_POST,
+  type: types.REMOVE_POST,
   postId: post.id
 });
 
 export const sortByScore = () => ({
-    type: SORT_BY_SCORE
+    type: types.SORT_BY_SCORE
 });
 
 export const sortByDate = () => ({
-    type: SORT_BY_DATE
+    type: types.SORT_BY_DATE
 });
