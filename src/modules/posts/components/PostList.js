@@ -14,8 +14,45 @@ class PostList extends Component {
     votePost(postId, { option: vote });
   }
 
+  renderList() {
+    const { list } = this.props;
+
+    return (
+      <ul className='post-list'>
+        {list && list.map((post) => (
+          <li key={`post-${post.id}`}>
+            <Link to={{
+              pathname: `/${post.category}/${post.id}`
+            }}>
+              <h2>{post.title}</h2>
+            </Link>
+            <p className='post-header'>
+              <span className='date'>{new Date(post.timestamp).toDateString()}</span>
+              <span className='author'>by {post.author}</span>
+              <span className='score'>score: {post.voteScore}</span>
+            </p>
+            <p className='category'>
+              Category: <span className='category-name'>{post.category}</span>
+            </p>
+            <button className='btn btn--left' onClick={() => this.removePost(post.id)}>Delete</button>
+            <Link className='btn btn--small' to={{
+              pathname: '/edit',
+              state: { 'post': post }
+            }}>Edit</Link>
+            <p className='block'>
+              Vote:&nbsp;
+              <button className='btn btn--left btn--vote' onClick={() => this.votePost(post.id, 'upVote')}>:)</button>
+              <button className='btn btn--vote' onClick={() => this.votePost(post.id, 'downVote')}>:(</button>
+            </p>
+            <p>Comments: <span className='number-comments'>{post.commentCount}</span></p>
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
-    const { list, sortByScore, sortByDate, categoryName } = this.props;
+    const { sortByScore, sortByDate, categoryName } = this.props;
 
     return (
         <div className='content'>
@@ -34,36 +71,7 @@ class PostList extends Component {
             <button className='btn btn--left btn--sort' onClick={() => sortByScore()}>Score</button>
             <button className='btn btn--sort' onClick={() => sortByDate()}>Date</button>
           </div>
-          <ul className='post-list'>
-            {list && list.map((post) => (
-              <li key={`post-${post.id}`}>
-                <Link to={{
-                  pathname: `/${post.category}/${post.id}`
-                }}>
-                  <h2>{post.title}</h2>
-                </Link>
-                <p className='post-header'>
-                  <span className='date'>{new Date(post.timestamp).toDateString()}</span>
-                  <span className='author'>by {post.author}</span>
-                  <span className='score'>score: {post.voteScore}</span>
-                </p>
-                <p className='category'>
-                  Category: <span className='category-name'>{post.category}</span>
-                </p>
-                <button className='btn btn--left' onClick={() => this.removePost(post.id)}>Delete</button>
-                <Link className='btn btn--small' to={{
-                  pathname: '/edit',
-                  state: { 'post': post }
-                }}>Edit</Link>
-                <p className='block'>
-                  Vote:&nbsp;
-                  <button className='btn btn--left btn--vote' onClick={() => this.votePost(post.id, 'upVote')}>:)</button>
-                  <button className='btn btn--vote' onClick={() => this.votePost(post.id, 'downVote')}>:(</button>
-                </p>
-                <p>Comments: <span className='number-comments'>{post.commentCount}</span></p>
-              </li>
-            ))}
-          </ul>
+          { this.renderList() }
         </div>
     )
   }
