@@ -41,6 +41,8 @@ class PostCreate extends Component {
      if (redirect) {
        if (post) {
          return <Redirect to={`/${post.category}/${post.id}`} />;
+       } if (categoryName) {
+         return <Redirect to={`/${categoryName}`} />;
        }
        return <Redirect to='/' />;
      }
