@@ -4,8 +4,20 @@ import { addComment, editComment } from './../CommentActions'
 import { generateId } from '../../../utils/utils';
 
 class CommentCreate extends Component {
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit(event) {
-    const { comment, postId, addComment, editComment } = this.props;
+    event.preventDefault();
+
+    const { comment, postId, addComment, editComment, addEditCallback } = this.props;
+
+    // validate empty fields
+    if (!this.body.value || (!comment && !this.author.value)) {
+      return false;
+    }
 
     if (comment) {
       editComment(
@@ -24,6 +36,8 @@ class CommentCreate extends Component {
         author: this.author.value
       });
     }
+
+    addEditCallback();
   }
 
   render() {
@@ -32,7 +46,7 @@ class CommentCreate extends Component {
     return (
       <div className='block'>
         <h3>{comment ? 'Edit Comment' : 'Create New Comment'}</h3>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form onSubmit={this.handleSubmit}>
             <label>Body</label>
             <input type='text' ref={(domNode) => { this.body = domNode }}
                    defaultValue={comment ? comment.body : ''} />

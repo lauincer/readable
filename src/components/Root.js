@@ -19,7 +19,7 @@ class Root extends Component {
   render() {
     const { category, posts } = this.props;
 
-    if (posts.postList && posts.postList) {
+    if (posts.postList && category.categoryList) {
       return (
         <div>
           <Switch>

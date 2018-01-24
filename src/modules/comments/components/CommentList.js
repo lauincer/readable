@@ -40,12 +40,23 @@ class CommentList extends Component {
     return this.state.showEditFormId === commentId;
   }
 
+  onCommentAdded() {
+    this.setState({
+      showAddForm: false,
+      showEditFormId: false
+    });
+  }
+
   renderComment(comment) {
     const { postId } = this.props;
 
     if (this.showEditForm(comment.id)) {
       return (
-        <CommentCreate postId={postId} comment={comment} key={comment.id} />
+        <CommentCreate
+          postId={postId}
+          comment={comment}
+          addEditCallback={() => this.onCommentAdded()}
+          key={comment.id} />
       )
     } else {
       return (
@@ -86,7 +97,7 @@ class CommentList extends Component {
             <button className='btn' onClick={() => this.addComment()}>+ Add New Comment</button>
           }
           {showAddForm &&
-            <CommentCreate postId={postId} />
+            <CommentCreate postId={postId} addEditCallback={() => this.onCommentAdded()} />
           }
         </div>
     )

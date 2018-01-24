@@ -9,8 +9,20 @@ class PostCreate extends Component {
     redirect: false
   }
 
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   handleSubmit(event) {
     const { post, addPost, editPost } = this.props;
+
+    // validate empty fields
+    if (!this.title.value || !this.body.value ||
+      (!post && (!this.category.value || !this.author.value))) {
+      event.preventDefault();
+      return false;
+    }
 
     if (post) {
       editPost(
@@ -53,7 +65,7 @@ class PostCreate extends Component {
           {post ? 'Edit Post' : 'Create New Post'}
         </h1>
         <hr/>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form onSubmit={this.handleSubmit}>
             <label>Title</label>
             <input type='text' ref={(domNode) => { this.title = domNode }}
                    defaultValue={post ? post.title : ''} />
